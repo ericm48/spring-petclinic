@@ -10,15 +10,17 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.18</version>
+    <version>3.0.13</version>
   </parent>
   <name>petclinic</name>
 
   <properties>
     <basedir>/Users/npike/repos/spring-petclinic</basedir>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
 
     <!-- Generic properties -->
-    <java.version>1.8</java.version>
+    <java.version>17</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -26,12 +28,21 @@
     <webjars-bootstrap.version>3.3.6</webjars-bootstrap.version>
     <webjars-jquery-ui.version>1.11.4</webjars-jquery-ui.version>
     <webjars-jquery.version>2.2.4</webjars-jquery.version>
-    <wro4j.version>1.8.0</wro4j.version>
+    <wro4j.version>2.1.1</wro4j.version>
 
-    <jacoco.version>0.8.5</jacoco.version>
+    <jacoco.version>0.8.12</jacoco.version>
     <nohttp-checkstyle.version>0.0.4.RELEASE</nohttp-checkstyle.version>
     <spring-format.version>0.0.25</spring-format.version>
   </properties>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>jakarta.validation</groupId>
+        <artifactId>jakarta.validation-api</artifactId>
+        <version>3.1.0</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <!-- Spring and Spring Boot dependencies -->
@@ -80,6 +91,11 @@
       <artifactId>mysql-connector-j</artifactId>
       <scope>runtime</scope>
     </dependency>
+    <dependency>
+      <groupId>org.glassfish.jaxb</groupId>
+      <artifactId>jaxb-runtime</artifactId>
+      <scope>runtime</scope>
+    </dependency>
 
     <!-- caching -->
     <dependency>
@@ -87,12 +103,17 @@
       <artifactId>cache-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>javax.validation</groupId>
-      <artifactId>validation-api</artifactId>
+      <groupId>jakarta.validation</groupId>
+      <artifactId>jakarta.validation-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.xml.bind</groupId>
+      <artifactId>jakarta.xml.bind-api</artifactId>
     </dependency>
     <dependency>
       <groupId>org.ehcache</groupId>
       <artifactId>ehcache</artifactId>
+      <classifier>jakarta</classifier>
     </dependency>
 
     <!-- webjars -->
@@ -142,7 +163,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.1.1</version>
+        <version>3.4.0</version>
         <dependencies>
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
